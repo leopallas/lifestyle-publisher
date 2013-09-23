@@ -14,13 +14,13 @@ class FileUrl(object):
         获取图片的url地址
         """
         import sys
-        from hashlib import md5
-        self.__md5 = md5()
         self.__sys = sys
 
     def __md5_id(self, content):
-        self.__md5.update(content)
-        return self.__md5.hexdigest()
+        from hashlib import md5
+        md5 = md5()
+        md5.update(content)
+        return md5.hexdigest()
 
     def __get_dir_list(self, dir_id):
         dir_list = []
@@ -62,27 +62,28 @@ class FileUrl(object):
 
 
 class HtmlGenerator(object):
-    def __init__(self, domain, db_conn, no_img_uri):
+    def __init__(self, work_path, domain, db_conn, no_img_uri):
         """
         生成HTML片段
         """
+        self.__work_path = work_path
         self.__domain = domain
         self.__conn = db_conn
         self.__no_img_uri = no_img_uri
 
     def __read_template_html(self, name):
-        fileHandle = open(name)
+        import os
+        file = os.path.join(self.__work_path, name)
+        fileHandle = open(file)
         templateHTML = fileHandle.read()
         fileHandle.close()
         return templateHTML
 
     def couponHTML(self, sql):
         templateHTML = self.__read_template_html('template/coupon.html')
-
         coupon_list = self.__conn.getAll(sql)
         couponHTML = ''
         url = FileUrl()
-        print coupon_list
         for coupon in coupon_list:
             if coupon['ATTACHMENT_ID'] is None:
                 coupon['URL'] = self.__no_img_uri
@@ -159,10 +160,10 @@ class HtmlGenerator(object):
 
 
 if __name__ == '__main__':
-    task_id = '521dbdd3e4b06aca32be777f'
-    attach_id = '521dbdd3e4b06aca32be7780'
+    task_id = '52390baae4b07f22a540c23c'
+    attach_id = '52390baae4b07f22a540c23c'
 
-    domain = "www.wjia.com.cn"
+    domain = "i.wjia.com.cn"
 
     IMG_FILE = {
         'parentId': None,
@@ -170,5 +171,4 @@ if __name__ == '__main__':
         'type': '.jpg',
         'dimension': THUMB_SMALL_NAME,
     }
-
     print FileUrl().get_file_url(domain=domain, file=IMG_FILE)

@@ -18,8 +18,6 @@ def perform(inc, gen, sqls, out_put_path):
 
 
 def generateIndexPage(gen, sqls, out_put_path):
-    print "Current Time:", time.time()
-
     couponHTML = gen.couponHTML(sqls[0])
     houseHTML = gen.houseHTML(sqls[1])
     shopHTML = gen.shopHTML(sqls[2])
@@ -27,7 +25,9 @@ def generateIndexPage(gen, sqls, out_put_path):
 
     page_context = {'couponHTML': couponHTML, 'houseHTML': houseHTML, 'shopHTML': shopHTML, 'secondhandHTML': secondhandHTML,}
 
-    fileHandle = open('template/index.html')
+    root_dir = os.path.abspath(os.path.dirname(__file__))
+    index_html_file = os.path.join(root_dir, 'template/index.html')
+    fileHandle = open(index_html_file)
     template = fileHandle.read()
     fileHandle = open(out_put_path, 'w')
     fileHandle.write(template % page_context)
@@ -37,6 +37,7 @@ def generateIndexPage(gen, sqls, out_put_path):
 def init():
     #获取当前脚本执行的目录
     root_dir = os.path.abspath(os.path.dirname(__file__))
+    #sys.path.append(root_dir)
 
     #配置文件路径
     config_file = os.path.join(root_dir, 'config.ini')
@@ -47,7 +48,7 @@ def init():
 
     #读取配置文件
     cf = ConfigParser.ConfigParser()
-    cf.read('config.ini')
+    cf.read(config_file)
     #read server
     domain_img = cf.get("Domain", "domain_img")
 
@@ -62,8 +63,8 @@ def init():
                           db=cf.get("Database", "db"), charset=cf.get("Database", "charset"))
 
     no_img_uri = cf.get("URI", "defaultNoImgUri")
-    gen = HtmlGenerator(domain_img, db_conn, no_img_uri)
-    out_put_path = cf.get("URI", "outPutPath")
+    gen = HtmlGenerator(root_dir, domain_img, db_conn, no_img_uri)
+    out_put_path = cf.get("FILE", "outPutPath")
     return gen, sqls, out_put_path
 
 
@@ -73,23 +74,25 @@ def main(inc=5 * 60, round=False):
     :param round: 是否循环执行, 默认不循环执行
     """
     parm = init()
-    if round:
+    if not round:
         generateIndexPage(parm[0], parm[1], parm[2])
     else:
         s.enter(0, 0, perform, (inc, parm[0], parm[1], parm[2]))
         s.run()
 
 if __name__ == '__main__':
-    round = raw_input('是否开始执行自动生成首页程序 (yes or no) : ')
-    if round is None or round.strip() == '' or round.upper() == 'NO':
-        main()
-    elif round.upper() == 'YES':
-        try:
-            interval_time = int(raw_input('输入生成的时间间隔(秒) : '))
-            print interval_time
-        except ValueError:
-            print "请输入有效的时间间隔"
+    main()
 
-        main(inc=interval_time, round=True)
-    else:
-        print "输入参数错误"
+    # round = raw_input('是否开始执行自动生成首页程序 (yes or no) : ')
+    # if round is None or round.strip() == '' or round.upper() == 'NO':
+    #     main()
+    # elif round.upper() == 'YES':
+    #     try:
+    #         interval_time = int(raw_input('输入生成的时间间隔(秒) : '))
+    #         print interval_time
+    #     except ValueError:
+    #         print "请输入有效的时间间隔"
+    #
+    #     main(inc=interval_time, round=True)
+    # else:
+    #     print "输入参数错误"
