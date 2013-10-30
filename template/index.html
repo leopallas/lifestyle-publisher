@@ -10,16 +10,15 @@
     <link rel="shortcut icon" href="resources/image/logo.png" />
 </head>
 <body>
-<div class="navbar navbar-fixed-top carousel-caption">
+<div class="navbar navbar-fixed-top">
     <div class="container">
         <div class="brand dropdown">
-            <a href="index.html" id="logo">
+            <a href="http://fang.wjia.com.cn/index.html" id="logo">
                 <img src="resources/image/logo.png" />
             </a>
         </div>
         <ul class="nav">
-            <li><a href="index.html" id="current">首页</a></li>
-            <li><a href="http://i.wjia.com.cn/login/home">物业服务</a></li>
+            <li><a href="http://i.wjia.com.cn" id="current">首页</a></li>
             <li class="dropdown">
                 <a href="#" data-toggle="dropdown" class="dropdown-toggle">房屋出租<i class="caret"></i></a>
                 <ul class="dropdown-menu">
@@ -35,10 +34,20 @@
                     <li><a href="http://i.wjia.com.cn/coupon/couponList"><i class="icon-tag"></i> 优惠券</a></li>
                 </ul>
             </li>
-            <li><a href="http://i.wjia.com.cn/login/home">费用查询</a></li>
-        </ul>
-        <ul class="nav pull-right">
-            <li><a href="http://i.wjia.com.cn/login/home">登录</a></li>
+            <li class="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle">物业服务<i class="caret"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href="http://i.wjia.com.cn/express/listMyExpress">我的快递</a></li>
+                    <li><a href="http://i.wjia.com.cn/vote/initUserVoteList">我的投票</a></li>
+                    <li><a href="http://i.wjia.com.cn/entrust/listMyEntrust">我的委托</a></li>
+                    <li><a href="http://i.wjia.com.cn/suggestion/mySuggestionList">我的投诉建议</a></li>
+                    <li><a href="http://i.wjia.com.cn/information/informationList">我的社区信息</a></li>
+                    <li><a href="http://i.wjia.com.cn/repair/repairList?chargeType=0">我的无偿服务</a></li>
+                    <li><a href="http://i.wjia.com.cn/repair/repairList?chargeType=1">我的有偿服务</a></li>
+                    <li><a href="http://i.wjia.com.cn/login/initBindingUser">我的U盾绑定</a></li>
+                </ul>
+            </li>
+            <li><a href="#" onclick="alert('即将开放，敬请期待！');">费用查询</a></li>
         </ul>
     </div>
 </div>
@@ -57,8 +66,8 @@
             <li class="banner6"><a href="http://i.wjia.com.cn/login/home"><img src="resources/image/indexBannerSD.png" />水电气</a></li>
         </ul>
         <div id="valid_form" style="width:290px; line-height:24px; margin-top:20px; color:#444;">
-        网家-电子化社区平台<br />以智能化的全新概念，创新的科技平台，旨在帮助业主生活中互动信息的快捷、安全传递。
-        借助专业、规范、高效、科学的管理模式，竭诚为业主提供舒适、便捷、愉快的生活体验。
+            网家-电子化社区平台<br />以智能化的全新概念，创新的科技平台，旨在帮助业主生活中互动信息的快捷、安全传递。
+            借助专业、规范、高效、科学的管理模式，竭诚为业主提供舒适、便捷、愉快的生活体验。
         </div>
     </div>
 </div>
@@ -79,7 +88,7 @@
                 <a href="http://i.wjia.com.cn/coupon/couponList">炒菜</a>
                 <a href="http://i.wjia.com.cn/coupon/couponList">其它</a>
             </dd>
-        </dl>        
+        </dl>
         <dl>
             <dt>人均：</dt>
             <dd>
@@ -97,53 +106,11 @@
         </dl>
     </div>
     <ul class="thumbnails">
-        %(couponHTML)s
+        <ul class="thumbnails">
+            %(couponHTML)s
+        </ul>
     </ul>
 </div>
-
-<!----房屋---------------------------------------------->
-
-<div id="fangwu">
-    <div class="container">
-        <div class="alert dl-horizontal">
-            <h2><i class="icon-home"></i><a href="http://fang.wjia.com.cn/rent/rentList">最新房屋信息</a></h2>
-            <dl>
-                <dt>厅室：</dt>
-                <dd>
-                    <a href="http://fang.wjia.com.cn/rent/rentList">一室</a>
-                    <a href="http://fang.wjia.com.cn/rent/rentList">两室</a>
-                    <a href="http://fang.wjia.com.cn/rent/rentList">三室</a>
-                    <a href="http://fang.wjia.com.cn/rent/rentList">四室</a>
-                </dd>
-            </dl>
-            <dl>
-                <dt>价格：</dt>
-                <dd>
-                    <a href="http://fang.wjia.com.cn/rent/rentList">100元以下</a>
-                    <a href="http://fang.wjia.com.cn/rent/rentList">100-200元</a>
-                    <a href="http://fang.wjia.com.cn/rent/rentList">200-300元</a>
-                    <a href="http://fang.wjia.com.cn/rent/rentList">300-400元</a>
-                    <a href="http://fang.wjia.com.cn/rent/rentList">400-500元</a>
-                    <a href="http://fang.wjia.com.cn/rent/rentList">500-600元</a>
-                    <a href="http://fang.wjia.com.cn/rent/rentList">600-700元</a>
-                    <a href="http://fang.wjia.com.cn/rent/rentList">800元以上</a>
-                </dd>
-            </dl>
-        </div>
-        %(houseHTML)s
-    </div>
-</div>
-
-<!----商家----------------------------------------->
-
-<ul class="thumbnails shangjia">
-    <li class="span5">
-        <a href="http://i.wjia.com.cn/shop/shopList">
-            <img src="http://img02.taobaocdn.com/tps/i2/T1X.N8XtFbXXaCwpjX.png" title="商家名" />
-        </a>
-    </li>
-    %(shopHTML)s
-</ul>
 
 <!----跳蚤市场----------------------------------------->
 
@@ -168,6 +135,51 @@
         </ul>
     </div>
 </div>
+
+<!----商家----------------------------------------->
+
+<ul class="thumbnails shangjia">
+    <li class="span5">
+        <a href="http://i.wjia.com.cn/shop/shopList">
+            <img src="http://img02.taobaocdn.com/tps/i2/T1X.N8XtFbXXaCwpjX.png" title="商家名" />
+        </a>
+    </li>
+    %(shopHTML)s
+</ul>
+
+<!----房屋---------------------------------------------->
+
+<!--<div id="fangwu">-->
+    <!--<div class="container">-->
+        <!--<div class="alert dl-horizontal">-->
+            <!--<h2><i class="icon-home"></i><a href="http://fang.wjia.com.cn/rent/rentList">最新房屋信息</a></h2>-->
+            <!--<dl>-->
+                <!--<dt>厅室：</dt>-->
+                <!--<dd>-->
+                    <!--<a href="http://fang.wjia.com.cn/rent/rentList">一室</a>-->
+                    <!--<a href="http://fang.wjia.com.cn/rent/rentList">两室</a>-->
+                    <!--<a href="http://fang.wjia.com.cn/rent/rentList">三室</a>-->
+                    <!--<a href="http://fang.wjia.com.cn/rent/rentList">四室</a>-->
+                <!--</dd>-->
+            <!--</dl>-->
+            <!--<dl>-->
+                <!--<dt>价格：</dt>-->
+                <!--<dd>-->
+                    <!--<a href="http://fang.wjia.com.cn/rent/rentList">100元以下</a>-->
+                    <!--<a href="http://fang.wjia.com.cn/rent/rentList">100-200元</a>-->
+                    <!--<a href="http://fang.wjia.com.cn/rent/rentList">200-300元</a>-->
+                    <!--<a href="http://fang.wjia.com.cn/rent/rentList">300-400元</a>-->
+                    <!--<a href="http://fang.wjia.com.cn/rent/rentList">400-500元</a>-->
+                    <!--<a href="http://fang.wjia.com.cn/rent/rentList">500-600元</a>-->
+                    <!--<a href="http://fang.wjia.com.cn/rent/rentList">600-700元</a>-->
+                    <!--<a href="http://fang.wjia.com.cn/rent/rentList">800元以上</a>-->
+                <!--</dd>-->
+            <!--</dl>-->
+        <!--</div>-->
+        <!--%(houseHTML)s-->
+    <!--</div>-->
+<!--</div>-->
+
 <div class="container" style="margin-top:40px;">
     <table class="table table-bordered">
         <thead>
@@ -203,7 +215,7 @@
             <td><a href="http://i.wjia.com.cn/login/home">无偿服务</a><a href="http://i.wjia.com.cn/login/home">有偿服务</a></td>
             <td>&nbsp;</td>
             <td><a href="http://i.wjia.com.cn/secondhand/secondhandList">二手设备</a><a href="http://i.wjia.com.cn/secondhand/secondhandList">其它二手</a></td>
-            <td><a href="http://i.wjia.com.cn/coupon/couponList">自助</a><a href="http://i.wjia.com.cn/coupon/couponList">炒菜</a></td>
+            <td><a href="http://i.wjia.com.cn/coupon/couponList">自助</a><a href="http://i.wjia.com.cn/coupon/couponList">炒菜</a</td>
             <td><a href="http://i.wjia.com.cn/shop/shopList">餐饮娱乐</a><a href="http://i.wjia.com.cn/shop/shopList">其它</a></td>
         </tr>
         <tr>
@@ -218,10 +230,13 @@
     </table>
 </div>
 
-<footer class="modal-footer">
-    <p><a href="#">关于我们</a> | <a href="#">加入我们</a> | <a href="#">联系我们</a> | <a href="#">网站地图</a> | <a href="#">友情链接</a> | <a href="#">社区准则</a> | <a href="#">隐私政策</a></p>
-    <p class="muted">网家 www.wjia.com.cn©2012 蜀IC备 12013054号-1</p>
-</footer>
+<div class="modal-footer">
+    <span class="muted">网家 wjia.com.cn©2013-2014 蜀IC备 12013054号-1</span>
+    <a href="http://fang.wjia.com.cn/about.html">关于我们</a> |
+    <a href="http://fang.wjia.com.cn/about.html">联系我们</a> |
+    <a href="http://fang.wjia.com.cn/about.html">加入我们</a> |
+    <a href="http://fang.wjia.com.cn/about.html">帮助中心</a>
+</div>
 
 </body>
 </html>
